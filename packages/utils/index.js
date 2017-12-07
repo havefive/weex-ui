@@ -14,7 +14,7 @@ const Utils = {
     return Utils._typeof(obj) === 'object';
   },
   isString (obj) {
-    return typeof(obj) === 'string';
+    return typeof (obj) === 'string';
   },
   isNonEmptyArray (obj = []) {
     return obj && obj.length > 0 && Array.isArray(obj) && typeof obj !== 'undefined';
@@ -63,32 +63,43 @@ const Utils = {
     const url = Utils.appendProtocol(jumpUrlObj.toString());
     Navigator.push({
       url: Utils.encodeURLParams(url),
-      animated: animated,
+      animated: animated
     }, callback);
   },
   env: {
     isTaobao () {
-      let { appName } = weex.config.env;
+      const { appName } = weex.config.env;
       return /(tb|taobao|淘宝)/i.test(appName);
     },
     isTrip () {
-      let { appName } = weex.config.env;
+      const { appName } = weex.config.env;
       return appName === 'LX';
     },
     isWeb () {
-      let { platform } = weex.config.env;
-      return typeof(window) === 'object' && platform.toLowerCase() === 'web';
+      const { platform } = weex.config.env;
+      return typeof (window) === 'object' && platform.toLowerCase() === 'web';
     },
     isIOS () {
-      let { platform } = weex.config.env;
+      const { platform } = weex.config.env;
       return platform.toLowerCase() === 'ios';
     },
+    /**
+     * 是否为 iPhone X
+     * @returns {boolean}
+     */
+    isIPhoneX () {
+      const { deviceHeight } = weex.config.env;
+      if (Utils.env.isWeb()) {
+        return typeof window !== undefined && window.screen && window.screen.width && window.screen.height && (parseInt(window.screen.width, 10) === 375) && (parseInt(window.screen.height, 10) === 812);
+      }
+      return Utils.env.isIOS() && deviceHeight === 2436;
+    },
     isAndroid () {
-      let { platform } = weex.config.env;
+      const { platform } = weex.config.env;
       return platform.toLowerCase() === 'android';
     },
     isAlipay () {
-      let { appName } = weex.config.env;
+      const { appName } = weex.config.env;
       return appName === 'AP';
     },
     isAlipayWeb () {
@@ -123,7 +134,7 @@ const Utils = {
      */
     getPageHeight () {
       const { env } = weex.config;
-      const navHeight = Utils.env.isWeb() ? 0 : 130;
+      const navHeight = Utils.env.isWeb() ? 0 : (Utils.env.isIPhoneX() ? 176 : 132);
       return env.deviceHeight / env.deviceWidth * 750 - navHeight;
     }
   },
@@ -140,14 +151,14 @@ const Utils = {
    * const { compareVersion } = Utils;
    * console.log(compareVersion('0.1.100', '0.1.11')); // 'true'
    */
-  compareVersion (currVer = "0.0.0", promoteVer = "0.0.0") {
+  compareVersion (currVer = '0.0.0', promoteVer = '0.0.0') {
     if (currVer === promoteVer) return true;
-    const currVerArr = currVer.split(".");
-    const promoteVerArr = promoteVer.split(".");
+    const currVerArr = currVer.split('.');
+    const promoteVerArr = promoteVer.split('.');
     const len = Math.max(currVerArr.length, promoteVerArr.length);
     for (let i = 0; i < len; i++) {
-      let proVal = ~~promoteVerArr[i];
-      let curVal = ~~currVerArr[i];
+      const proVal = ~~promoteVerArr[i];
+      const curVal = ~~currVerArr[i];
       if (proVal < curVal) {
         return true;
       } else if (proVal > curVal) {
@@ -162,7 +173,7 @@ const Utils = {
    * @param size 分割数组的长度
    * @returns {Array}
    */
-   arrayChunk (arr = [], size = 4) {
+  arrayChunk (arr = [], size = 4) {
     let groups = [];
     if (arr && arr.length > 0) {
       groups = arr.map((e, i) => {
@@ -175,7 +186,7 @@ const Utils = {
   },
   truncateString (str, len, hasDot = true) {
     let newLength = 0;
-    let newStr = "";
+    let newStr = '';
     let singleChar = '';
     const chineseRegex = /[^\x00-\xff]/g;
     const strLength = str.replace(chineseRegex, '**').length;

@@ -12,6 +12,7 @@
                           :height="height"></wxc-part-loading>
       </div>
       <wxc-cell :has-top-border="true"
+                :auto-accessible="false"
                 title="开启局部Loading">
         <switch :checked="partShow"
                 slot="value"
@@ -36,13 +37,15 @@
       <div class="blank"></div>
       <category title="页面Loading配置"></category>
       <wxc-cell :has-top-border="false"
+                :auto-accessible="false"
                 title="开启Loading">
         <switch :checked="isShow"
                 slot="value"
                 @change="isShow= !isShow"></switch>
       </wxc-cell>
       <wxc-cell :has-top-border="false"
-                title="切换飞猪">
+                :auto-accessible="false"
+                title="自定义Loading">
         <switch :checked="type === 'trip'"
                 slot="value"
                 @change="type=(type === 'trip'? 'default' : 'trip')"></switch>

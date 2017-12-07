@@ -3,7 +3,7 @@
  * Created by Tw93 on 17/09/25
  */
 
-import Utils from './packages/utils'
+import Utils from './packages/utils';
 import WxcButton from './packages/wxc-button';
 import WxcCell from './packages/wxc-cell';
 import WxcCheckbox from './packages/wxc-checkbox';
@@ -35,6 +35,7 @@ import WxcSlideNav from './packages/wxc-slide-nav';
 import WxcSliderBar from './packages/wxc-slider-bar';
 import WxcStepper from './packages/wxc-stepper';
 import WxcTabPage from './packages/wxc-tab-page';
+import WxcTabBar from './packages/wxc-tab-bar';
 import WxcTag from './packages/wxc-tag';
 
 export {
@@ -70,5 +71,6 @@ export {
   WxcSliderBar,
   WxcStepper,
   WxcTabPage,
+  WxcTabBar,
   WxcTag
-}
+};

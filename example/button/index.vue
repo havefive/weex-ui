@@ -7,13 +7,6 @@
       <title title="wxc-button"></title>
       <category title="五种基本样式"></category>
       <div class="button-list">
-        <text class="button-text">taobao</text>
-        <wxc-button text="确定"
-                    @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-        <text class="button-text">fliggy</text>
-        <wxc-button text="确定"
-                    type="fliggy"
-                    @wxcButtonClicked="wxcButtonClicked"></wxc-button>
         <text class="button-text">normal</text>
         <wxc-button text="确定"
                     type="normal"
@@ -22,61 +15,62 @@
         <wxc-button text="确定"
                     type="highlight"
                     @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+        <text class="button-text">red</text>
+        <wxc-button text="确定"
+                    type="red"
+                    @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+        <text class="button-text">yellow</text>
+        <wxc-button text="确定"
+                    type="yellow"
+                    @wxcButtonClicked="wxcButtonClicked"></wxc-button>
         <text class="button-text">disabled</text>
         <wxc-button text="确定"
                     :disabled="true"
                     @wxcButtonClicked="wxcButtonClicked"></wxc-button>
       </div>
       <category title="自定义样式"></category>
-      <wxc-cell :has-top-border="false"
-                title="按钮的文字">
+      <wxc-cell :has-top-border="false" title="按钮的文字">
         <input class="input"
                slot="value"
                placeholder="文字"
                :value="text"
                @input="text=$event.value"/>
       </wxc-cell>
-      <wxc-cell :has-top-border="false"
-                title="是否禁用">
+      <wxc-cell :has-top-border="false" title="是否禁用">
         <switch :checked="disabled"
                 slot="value"
                 @change="disabled= !disabled"></switch>
       </wxc-cell>
 
-      <wxc-cell :has-top-border="false"
-                title="按钮宽度">
+      <wxc-cell :has-top-border="false" title="按钮宽度">
         <input class="input"
                slot="value"
                placeholder="自定义样式实现, 默认宽度702px"
                :value="width"
                @input="width=$event.value"/>
       </wxc-cell>
-      <wxc-cell :has-top-border="false"
-                title="按钮高度">
+      <wxc-cell :has-top-border="false" title="按钮高度">
         <input class="input"
                slot="value"
                placeholder="自定义样式实现, 默认高度88px"
                :value="height"
                @input="height=$event.value"/>
       </wxc-cell>
-      <wxc-cell :has-top-border="false"
-                title="背景颜色">
+      <wxc-cell :has-top-border="false" title="背景颜色">
         <input class="input"
                slot="value"
                placeholder="自定义样式实现"
                :value="backgroundColor"
                @input="backgroundColor=$event.value"/>
       </wxc-cell>
-      <wxc-cell :has-top-border="false"
-                title="边框颜色">
+      <wxc-cell :has-top-border="false" title="边框颜色">
         <input class="input"
                slot="value"
                placeholder="自定义样式实现"
                :value="borderColor"
                @input="borderColor=$event.value"/>
       </wxc-cell>
-      <wxc-cell :has-top-border="false"
-                title="边框圆角">
+      <wxc-cell :has-top-border="false" title="边框圆角">
         <input class="input"
                slot="value"
                placeholder="自定义样式实现,默认12px"
@@ -142,7 +136,7 @@
   export default {
     components: { Title, Category, WxcButton, WxcCell },
     data: () => ({
-      type: 'taobao',
+      type: 'red',
       text: '按钮文字',
       width: '702px',
       height: '88px',

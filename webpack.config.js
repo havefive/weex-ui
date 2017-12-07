@@ -7,8 +7,7 @@ const path = require('path');
 const pkg = require('./package.json');
 
 const webpack = require('webpack');
-const glob = require("glob");
-const ip = require('ip').address();
+const glob = require('glob');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
@@ -17,8 +16,8 @@ const plugins = [
     verbose: true
   }),
   new webpack.DefinePlugin({
-    "process.env": {
-      NODE_ENV: JSON.stringify("production")
+    'process.env': {
+      NODE_ENV: JSON.stringify('production')
     },
     'global': '{}'
   }),
@@ -31,7 +30,7 @@ const plugins = [
   ])
 ];
 
-const needClean = process.argv.indexOf("--watch") > -1;
+const needClean = process.argv.indexOf('--watch') > -1;
 needClean && plugins.shift();
 
 console.log('Building..., Please wait a moment.');
@@ -39,7 +38,7 @@ console.log('Building..., Please wait a moment.');
 const getEntry = dir => {
   const foundScripts = glob.sync(`${dir}/*/index.js`, {});
   // 生成 entry 映射表
-  let ret = {};
+  const ret = {};
   foundScripts.forEach(function (scriptPath) {
     if (!/\.entry\.js$/.test(scriptPath)) {
       ret[scriptPath.replace(/^(.*)\.js$/, '$1')] = './' + scriptPath;
@@ -95,22 +94,6 @@ const getBaseConfig = () => ({
 
 const webCfg = getBaseConfig();
 webCfg.output.filename = '[name].web.js';
-
-webCfg.devServer = {
-  inline: true,
-  headers: {
-    "Cache-Control": "no-cache"
-  },
-  hot: true,
-  host: '0.0.0.0',
-  port: '8080',
-  historyApiFallback: true,
-  public: ip + ':8080',
-  watchOptions: {
-    aggregateTimeout: 300,
-    poll: 1000
-  }
-};
 
 webCfg.module.rules[1].use.push({
   loader: 'vue-loader',
