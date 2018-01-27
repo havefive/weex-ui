@@ -3,8 +3,7 @@
 <!--A Cell -->
 
 <template>
-  <div
-    :class="['wxc-cell', hasTopBorder && 'cell-top-border', hasBottomBorder && 'cell-bottom-border', hasMargin && 'cell-margin', hasVerticalIndent && 'cell-indent', desc && 'has-desc']"
+  <div :class="['wxc-cell', hasTopBorder && 'cell-top-border', hasBottomBorder && 'cell-bottom-border', hasMargin && 'cell-margin', hasVerticalIndent && 'cell-indent', desc && 'has-desc']"
     :style="cellStyle"
     :accessible="autoAccessible"
     :aria-label="`${label},${title},${desc}`"
@@ -33,7 +32,6 @@
 <style scoped>
   .wxc-cell {
     height: 100px;
-    position: relative;
     flex-direction: row;
     align-items: center;
     padding-left: 24px;

@@ -32,7 +32,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #fff;
+    background-color: #ffffff;
   }
 
   .scroller {
@@ -44,8 +44,8 @@
     padding-bottom: 20px;
     text-align: center;
     font-size: 26px;
-    color: #333;
-    background-color: #eee;
+    color: #333333;
+    background-color: #eeeeee;
     font-weight: bold;
   }
 

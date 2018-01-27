@@ -24,6 +24,11 @@
         <image :src="currentPage == index ? v.activeIcon : v.icon"
                v-if="titleType === 'icon' && !titleUseSlot"
                :style="{ width: tabStyles.iconWidth + 'px', height:tabStyles.iconHeight+'px'}"></image>
+
+        <text class="icon-font"
+              v-if="titleType === 'iconFont' && v.codePoint && !titleUseSlot"
+              :style="{fontFamily: 'wxcIconFont',fontSize: tabStyles.iconFontSize+'px', color: currentPage == index ? tabStyles.activeIconFontColor : tabStyles.iconFontColor}">{{v.codePoint}}</text>
+
         <text
           v-if="!titleUseSlot"
           :style="{ fontSize: tabStyles.fontSize+'px', fontWeight: (currentPage == index && tabStyles.isActiveTitleBold)? 'bold' : 'normal', color: currentPage == index ? tabStyles.activeTitleColor : tabStyles.titleColor, paddingLeft:tabStyles.textPaddingLeft+'px', paddingRight:tabStyles.textPaddingRight+'px'}"
@@ -53,7 +58,6 @@
 <style scoped>
   .wxc-tab-page {
     width: 750px;
-    flex-direction: column;
   }
 
   .tab-title-list {
@@ -63,9 +67,7 @@
   .title-item {
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     border-bottom-style: solid;
-    position: relative;
   }
 
   .border-bottom {
@@ -76,7 +78,6 @@
   .tab-page-wrap {
     width: 750px;
     overflow: hidden;
-    position: relative;
   }
 
   .tab-container {
@@ -89,6 +90,12 @@
     lines: 1;
     text-overflow: ellipsis;
   }
+
+  .icon-font {
+    margin-bottom: 8px;
+    font-family: wxcIconFont;
+  }
+
 </style>
 
 <script>
@@ -182,6 +189,15 @@
       startPosY: 0,
       judge: 'INITIAL'
     }),
+    created () {
+      const { titleType, tabStyles } = this;
+      if (titleType === 'iconFont' && tabStyles.iconFontUrl) {
+        dom.addRule('fontFace', {
+          'fontFamily': "wxcIconFont",
+          'src': `url(${tabStyles.iconFontUrl})`
+        });
+      }
+    },
     mounted () {
       if (swipeBack && swipeBack.forbidSwipeBack) {
         swipeBack.forbidSwipeBack(true);

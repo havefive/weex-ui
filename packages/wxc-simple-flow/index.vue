@@ -41,7 +41,7 @@
   .root {
     padding-top: 28px;
     padding-bottom: 24px;
-    background-color: #fff;
+    background-color: #ffffff;
   }
 
   .title {
@@ -94,7 +94,7 @@
     border-style: solid;
     border-width: 2px;
     border-color: #EE9900;
-    border-radius: 100%;
+    border-radius: 100px;
   }
 
   .highlight-point {

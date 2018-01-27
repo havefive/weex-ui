@@ -102,15 +102,17 @@ npm i babel-preset-stage-0 babel-plugin-component  -D
       "component",
       {
         "libraryName": "weex-ui",
-        "libDir": "packages"
+        "libDir": "packages",
+         "style": false
       }
     ]
   ]
 }
 ```
+更多详细可见：[在 weex-toolkit 创建的项目中使用 Weex Ui](/docs/with-weex-toolkit_cn.md)和 [weex-ui-demo](https://github.com/tw93/weex-ui-demo)。
 
 ### 更多
-- 如果你的`webpack.config.js`中 babel-loader 配置有对 node_modules 进行 exclude 处理，需要将 weex-ui 包过滤才可以使用 `exclude: /node_modules(?!\/.*(weex).*)/`。
+- 如果你的`webpack.config.js`中 babel-loader 配置有对 node_modules 进行 exclude 处理，需要将 weex-ui 包过滤才可以使用 `exclude: /node_modules(?!(\/|\\).*(weex).*)/`。
 - 你可以从[这里](https://github.com/alibaba/weex-ui/tree/master/example)找到更多地例子，一次编写，同时支持iOS / Android / Html5。
 
 ## 文档
@@ -129,11 +131,13 @@ npm i babel-preset-stage-0 babel-plugin-component  -D
 |[wxc-tab-page](packages/wxc-tab-page/) * |导航|Tab页面切换滑动组件|
 |[wxc-checkbox](packages/wxc-checkbox/README_cn.md)|数据输入|复选列表|
 |[wxc-countdown](packages/wxc-countdown/README_cn.md)|数据输入|倒计时|
+|[wxc-grid-select](packages/wxc-grid-select/README_cn.md)|数据输入|网格选择|
 |[wxc-radio](packages/wxc-radio/README_cn.md)|数据输入|单选列表|
 |[wxc-slider-bar](packages/wxc-slider-bar/) * |数据输入|滑动选择数据|
 |[wxc-stepper](packages/wxc-stepper/README_cn.md)|数据输入|计数器|
 |[wxc-searchbar](packages/wxc-searchbar/README_cn.md)|数据输入|搜索栏|
-|[wxc-grid-select](packages/wxc-grid-select/README_cn.md)|数据展示|网格选择|
+|[wxc-city](packages/wxc-city/README_cn.md)|数据展示|通用城市选择|
+|[wxc-icon](packages/wxc-icon/README_cn.md)|数据展示|通用 iconFont 汇集 |
 |[wxc-indexlist](packages/wxc-indexlist/README_cn.md)|数据展示|索引列表|
 |[wxc-page-calendar](packages/wxc-page-calendar/README_cn.md)|数据展示|全屏日历|
 |[wxc-rich-text](packages/wxc-rich-text/README_cn.md)|数据展示|动态模块 富文本|

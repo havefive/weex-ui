@@ -2,7 +2,7 @@
 
 > An indexed list, can be navigated by index.
 
-### 规则：
+### Rule：
 - Support to set up columns and group presentations.
 - Basic component that`s often used in contact lists and city lists.
     
@@ -87,9 +87,29 @@ More details can be found in [here](https://github.com/alibaba/weex-ui/blob/mast
    ```
 - *4：Whether to only display list items, remove location, hot display, often used for search results display.
 
+### Slot
+
+`<slot name="head"></slot>`: A custom slot can be inserted at the beginning of the list, and `nav-style` can be introduced to compatible the styles.
+
+```
+<wxc-indexlist :normal-list="list.normalList"
+                   :hot-list-config="hotListConfig"
+                   :city-location-config="cityLocationConfig"
+                   :show-index="showIndex"
+                   @wxcIndexlistItemClicked="wxcIndexlistItemClicked">
+                <div slot="head"><text>aaaaaa</text></div>       
+</wxc-indexlist>
+```
+<img src="https://img.alicdn.com/tfs/TB1YhUjj9_I8KJjy0FoXXaFnVXa-818-276.jpg" width="240"/>
+
 ### Event
 
 ```
 `@wxcIndexlistItemClicked="wxcIndexlistItemClicked"`
 ```
+
+### Completely custom style
+- If the above default styles do not meet the requirements, you can cover the original style by passing the corresponding parameters.
+
+<img src="https://img.alicdn.com/tfs/TB13DEPn8TH8KJjy0FiXXcRsXXa-776-1370.jpg" width="300"/>
 

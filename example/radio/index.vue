@@ -5,7 +5,6 @@
       <title title="wxc-radio"></title>
       <category title="Radio可选"></category>
       <wxc-radio :list="list"
-                 :config="config"
                  @wxcRadioListChecked="wxcRadioListChecked"></wxc-radio>
       <text class="radio-text">checkedItem: {{checkedInfo}}</text>
       <category title="Radio不可选"></category>
@@ -21,7 +20,7 @@
     right: 0;
     left: 0;
     bottom: 0;
-    background-color: #fff;
+    background-color: #ffffff;
   }
 
   .scroller {
@@ -30,7 +29,7 @@
 
   .radio-text {
     font-size: 30px;
-    color: #333;
+    color: #333333;
     margin-top: 30px;
     margin-bottom: 30px;
     margin-left: 24px;

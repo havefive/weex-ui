@@ -38,6 +38,7 @@
                         :key="index"
                         :ext-id="index"
                         :class="['slider',`slider${index}`]"
+                        url="https://h5.m.taobao.com/trip/weex-ui/demo/index.native-min.js"
                         @wxcPanItemPan="wxcPanItemPan"
                         @wxcPanItemClick="wxcPanItemClick"
                         :slot="`card${index}_${autoSliderId}`"
@@ -61,7 +62,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #fff;
+    background-color: #ffffff;
   }
 
   .scroller {
@@ -81,10 +82,11 @@
     width: 250px;
     height: 80px;
     margin-left: 250px;
+    margin-bottom: 40px;
+    margin-top: 40px;
     background-color: #635147;
     align-items: center;
     justify-content: center;
-    margin-bottom: 40px;
   }
 
   .btn-text {

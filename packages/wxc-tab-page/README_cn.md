@@ -2,15 +2,17 @@
 
 > Weex tab 页面滑动切换组件
 
+!> 随手滑动的效果依赖于 [expressionBinding](https://github.com/alibaba/weex/issues/1730) 特性，使用前请确定你的App[是否支持](https://github.com/alibaba/weex-ui/issues/6)。
+
 ### 规则
 - 允许对头部进行配置，支持 ExpressionBinding 手势跟随效果，H5 支持降级效果滑动切换
-- 常用于 Tab 切换页面，目前支持**icon 和文字**形式的顶栏,详细可见[config.js](https://github.com/alibaba/weex-ui/blob/master/example/tab-page/config.js)
+- 常用于 Tab 切换页面，目前支持**icon、text、iconFont**形式的顶栏,详细可见[config.js](https://github.com/alibaba/weex-ui/blob/master/example/tab-page/config.js)
 - **Android 由于[此约束](http://weex-project.io/cn/references/gesture.html#约束)，需在子元素上绑定对应事件，可通过`wxc-pan-item`解决此问题**
 - 支持**居中形式 Tab**，将 tabStyles 中的 leftOffset 配置合适的值即可
  
 
 ## [Demo](https://h5.m.taobao.com/trip/wxc-tab-page/index.html?_wx_tpl=https%3A%2F%2Fh5.m.taobao.com%2Ftrip%2Fwxc-tab-page%2Fdemo%2Findex.native-min.js)
-<img src="https://gw.alipayobjects.com/zos/rmsportal/drLGhWpwwSbMTjMCWomE.gif" width="240"/>&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img.alicdn.com/tfs/TB1M7ywSpXXXXXuXXXXXXXXXXXX-200-200.png" width="160"/>
+<img src="https://gw.alipayobjects.com/zos/rmsportal/drLGhWpwwSbMTjMCWomE.gif" width="240"/>&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://gtms02.alicdn.com/tfs/TB1sjw3aMMPMeJjy1XdXXasrXXa-750-1334.jpg" width="240"/>&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img.alicdn.com/tfs/TB1M7ywSpXXXXXuXXXXXXXXXXXX-200-200.png" width="160"/>
 
 ## 使用方法
 
@@ -35,13 +37,9 @@
         <wxc-pan-item :ext-id="'1-' + (v) + '-' + (key)"
                       url="https://h5.m.taobao.com/trip/ticket/detail/index.html?scenicId=2675"
                       @wxcPanItemPan="wxcPanItemPan">
-          <wxc-item image="https://gtd.alicdn.com/imgextra/TB12yGaNVXXXXX7aXXXSutbFXXX.jpg"
-                    :image-text="tabTitles[index].title"
-                    title="飞猪专线｜四川成都出发到九寨沟牟尼沟 温泉3天2晚纯玩跟团旅游"
-                    :desc="desc"
-                    :tags="tags"
-                    price="219"
-                    price-desc="月售58笔｜999+条评论"></wxc-item>
+         <div class="content">
+            <text>{{key}}</text>
+         </div>
         </wxc-pan-item>
       </cell>
     </list>
@@ -68,6 +66,14 @@
   .cell {
     background-color: #ffffff;
   }
+  
+  .content{
+    width:750px;
+    height:300px;
+    border-bottom-width:1px;
+    align-items: center;
+    justify-content: center;
+  }
 </style>
 <script>
   const dom = weex.requireModule('dom');
@@ -77,7 +83,7 @@
   import Config from './config'
 
   export default {
-    components: { WxcTabPage, WxcPanItem, WxcItem },
+    components: { WxcTabPage, WxcPanItem },
     data: () => ({
       tabTitles: Config.tabTitles,
       tabStyles: Config.tabStyles,
@@ -86,17 +92,7 @@
       demoList: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       supportSlide: true,
       isTabView: true,
-      tabPageHeight: 1334,
-      desc: [{
-        type: 'text',
-        value: '特价机票|班期:清明 3/27-4/2等',
-        theme: 'gray'
-      }],
-      tags: [{
-        type: 'tag',
-        value: '满100减20测试',
-        theme: 'yellow'
-      }]
+      tabPageHeight: 1334
     }),
     created () {
       this.tabPageHeight = Utils.env.getPageHeight();
@@ -107,7 +103,7 @@
       wxcTabPageCurrentTabSelected (e) {
         const self = this;
         const index = e.page;
-        /* 未加载tab模拟数据请求 */
+        /* Unloaded tab analog data request */
         if (!Utils.isNonEmptyArray(self.tabList[index])) {
           setTimeout(() => {
             Vue.set(self.tabList, index, self.demoList);
@@ -122,7 +118,6 @@
     }
   };
 </script>
-
 ```
 更详细代码可以参考 [demo](https://github.com/alibaba/weex-ui/blob/master/example/tab-page/index.vue)
 
@@ -132,7 +127,7 @@
 | Prop | Type | Required | Default | Description |
 |-------------|------------|--------|-----|-----|
 | tab-titles | `Array` |`Y`| `[]` | 顶部 [显示配置](https://github.com/alibaba/weex-ui/blob/master/example/tab-page/config.js#L7)|
-| title-type | `String` |`N`| `icon` | 顶部类型 `icon`/`text`|
+| title-type | `String` |`N`| `icon` | 顶部类型 `icon`/`text`/`iconFont` (注1)|
 | tab-styles | `Array` |`N`| `[]` | 顶部 [样式配置](https://github.com/alibaba/weex-ui/blob/master/example/tab-page/config.js)|
 | tab-page-height | `Number` |`N`| `1334` | Tab page 页面的高度 |
 | is-tab-view | `Boolean` |`N`| `true` |当设置为`false`，同时 tab 配置 url 参数即可跳出|
@@ -140,9 +135,46 @@
 | pan-dist | `Number` |`N`| `200` | 滚动多少切换上下一屏幕|
 | duration | `Number` |`N`| `300` | 页面切换动画的时间 |
 | timing-function | `String` |`N`| `-` | 页面切换动画函数 |
-| title-use-slot | `Boolean` |`N`| `false` | 使用 slot 配置头部导航 (注1)|
+| title-use-slot | `Boolean` |`N`| `false` | 使用 slot 配置头部导航 (注2)|
 | wrap-bg-color | `String` |`N`| `#F2F3F4` |页面背景颜色|
 
+### 注1：使用 iconFont
+
+- 在 Weex Ui 0.3.8以后，我们可以使用 iconFont 来代替原有 tab title 中的图片配置，像下面这个配置即可：
+ 
+```
+ // https://github.com/alibaba/weex-ui/blob/master/example/tab-bar/config.js#L67
+ // '&#xe608;' -> '\ue608'
+  tabTitles: [
+    {
+      title: 'Home',
+      codePoint: '\ue608'
+    },
+    {
+      title: 'Message',
+      codePoint: '\ue752',
+      badge: 5
+    }
+    // ....
+  ],
+  // https://github.com/alibaba/weex-ui/blob/master/example/tab-page/config.js#L87
+  tabIconFontStyles: {
+      bgColor: '#FFFFFF',
+      titleColor: '#666666',
+      activeTitleColor: '#3D3D3D',
+      activeBgColor: '#FFFFFF',
+      isActiveTitleBold: true,
+      width: 160,
+      height: 120,
+      fontSize: 24,
+      textPaddingLeft: 10,
+      textPaddingRight: 10,
+      iconFontSize: 50,
+      iconFontColor: '#333333',
+      activeIconFontColor: 'red',
+      iconFontUrl: '//at.alicdn.com/t/font_501019_mauqv15evc1pp66r.ttf'
+    }
+```
 
 ### 注1：自定义头部导航块
 - 当使用slot的方式配置头部导航的时候，需要确保原有简单配置已经不能满足现有需求情况下再使用，可以传入参数`:title-use-slot="true"`,同时在wxc-tab-page组件内部传入如下slot对应节点即可

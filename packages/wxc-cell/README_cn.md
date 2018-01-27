@@ -18,7 +18,7 @@
       <text class="demo-title">列表list展示</text>
 
       <wxc-cell label="标题"
-                title="阿里旅行飞猪"
+                title="Weex Ui"
                 :has-arrow="true"
                 @wxcCellClicked="wxcCellClicked"
                 :has-margin="true"></wxc-cell>
@@ -32,7 +32,7 @@
                 :has-top-border="false"></wxc-cell>
 
       <wxc-cell label="标题"
-                title="阿里旅行飞猪"
+                title="Weex Ui"
                 :has-arrow="true"
                 @wxcCellClicked="wxcCellClicked"
                 :has-top-border="false"></wxc-cell>
@@ -102,6 +102,7 @@
 | has-bottom-border | `Bool` | `N`| `true` | 是否有下边框 |
 | has-vertical-indent | `Bool` | `N`| `true` |  是否有垂直间距 |
 | has-margin | `Bool` |`N`| `false` | cell之间是否有margin |
+| cell-style | `Object` |`N`| `{}` | 自定义cell的样式 |
 
 
 ### Slot

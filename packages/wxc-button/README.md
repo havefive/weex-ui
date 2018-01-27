@@ -28,13 +28,13 @@
 
 ```
 
-More details can be found in [here](https://github.com/alibaba/weex-ui/blob/master/button/loading/index.vue)
+More details can be found in [here](https://github.com/alibaba/weex-ui/blob/master/example/button/index.vue)
 
 ### API
 | Prop | Type | Required | Default | Description |
 | ---- |:----:|:---:|:-------:| :----------:|
 | **`text`** | `string` | `Y` | `-` | the text of button |
-| **`type`** | `enum` | `N` | `taobao` | can be set to  `normal`/ `highlight`/`red`/`yellow` |
+| **`type`** | `enum` | `N` | `red` | can be set to  `normal`/ `highlight`/`red`/`yellow` |
 | **`disabled`** | `bool` | `N` | `false` | set disabled（*1） |
 | **`btnStyle`** | `object` | `N` | `{}` | custom style about button（*2） |
 | **`textStyle`** | `object` | `N` | `{}` | custom style about text （*3） |

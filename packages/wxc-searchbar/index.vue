@@ -88,7 +88,6 @@
     height: 64px;
     line-height: 64px;
     background-color: #E5E5E5;
-    outline: none;
     border-radius: 6px;
   }
 
@@ -263,6 +262,9 @@
         this.$refs['search-input'].blur();
       },
       onFocus () {
+        if (this.isDisabled) {
+          return;
+        }
         this.showCancel = true;
         this.detectShowClose();
         this.$emit('wxcSearchbarInputOnFocus', { value: this.value });

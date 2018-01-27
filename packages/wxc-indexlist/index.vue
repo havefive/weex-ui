@@ -4,15 +4,20 @@
 <!--A index list. -->
 
 <template>
-  <div class="wxc-index-list">
+  <div>
     <list class="index-list"
           :style="{height: height+'px'}">
+      <cell>
+        <slot name="head"></slot>
+      </cell>
       <cell v-for="(v,i) in formatList"
             :key="i"
             :ref="'index-item-title-' + v.title">
         <text :class="['index-list-title',v.type && v.type=='group' && 'group-title']"
+              :style="headerStyle"
               v-if="!onlyShowList">{{v.title}}</text>
-        <div v-if="v.type && v.type=='group' && !onlyShowList"
+        <div v-if="v.type && v.type === 'group' && !onlyShowList"
+             :style="groupWrapStyle"
              class="group">
           <div v-for="(group,index) in v.data"
                :key="index"
@@ -21,15 +26,17 @@
                  :key="i"
                  @click="itemClicked(item)"
                  class="group-item"
+                 :style="groupItemStyle"
                  :accessible="true"
                  :aria-label="`${item.name},${item.desc?item.desc:''}`">
               <image v-if="item.isLocation"
                      class="location-icon"
                      src="https://gw.alicdn.com/tfs/TB1JUiUPFXXXXXUXXXXXXXXXXXX-32-32.png"></image>
-              <div class="item-content">
-                <text class="item-name">{{item.name}}</text>
-                <text class="item-desc"
-                      v-if="item.desc">{{item.desc}}</text>
+              <div>
+                <text class="item-name"
+                      :style="groupItemTextStyle">{{item.name}}</text>
+                <text class="item-desc" v-if="item.desc"
+                      :style="groupItemDescStyle">{{item.desc}}</text>
               </div>
             </div>
           </div>
@@ -38,11 +45,12 @@
           <div class="index-list-item"
                v-for="(item,index) in v.data"
                :key="index"
+               :style="itemStyle"
                @click="itemClicked(item)"
                :accessible="true"
                :aria-label="`${item.name},${item.desc?item.desc:''}`">
-            <text class="title">{{item.name}}</text>
-            <text class="desc">{{item.desc}}</text>
+            <text class="title" :style="itemTextStyle">{{item.name}}</text>
+            <text class="desc" :style="itemDescStyle">{{item.desc}}</text>
           </div>
         </div>
       </cell>
@@ -53,13 +61,15 @@
          v-if="showIndex && !onlyShowList">
       <text v-for="(item,index) in formatList"
             :key="index"
+            :style="navTextStyle"
             :title="item.title"
             @click="go2Key(item.title)"
             class="list-nav-key">{{item.title}}</text>
     </div>
     <div class="index-list-pop"
+         :style="popStyle"
          v-if="popKeyShow">
-      <text class="list-pop-text">{{popKey}}</text>
+      <text class="list-pop-text" :style="popTextStyle">{{popKey}}</text>
     </div>
   </div>
 </template>
@@ -87,16 +97,60 @@
         type: Boolean,
         default: true
       },
-      navStyle: {
-        type: Object,
-        default: () => ({})
-      },
       hotListConfig: {
         type: Object,
         default: () => ({})
       },
       // 城市选择子组件 特殊情况支持
       cityLocationConfig: {
+        type: Object,
+        default: () => ({})
+      },
+      headerStyle: {
+        type: Object,
+        default: () => ({})
+      },
+      navStyle: {
+        type: Object,
+        default: () => ({})
+      },
+      navTextStyle: {
+        type: Object,
+        default: () => ({})
+      },
+      popStyle: {
+        type: Object,
+        default: () => ({})
+      },
+      popTextStyle: {
+        type: Object,
+        default: () => ({})
+      },
+      itemStyle: {
+        type: Object,
+        default: () => ({})
+      },
+      itemTextStyle: {
+        type: Object,
+        default: () => ({})
+      },
+      itemDescStyle: {
+        type: Object,
+        default: () => ({})
+      },
+      groupWrapStyle: {
+        type: Object,
+        default: () => ({})
+      },
+      groupItemStyle:{
+        type: Object,
+        default: () => ({})
+      },
+      groupItemTextStyle:{
+        type: Object,
+        default: () => ({})
+      },
+      groupItemDescStyle:{
         type: Object,
         default: () => ({})
       }
@@ -139,10 +193,6 @@
 </script>
 
 <style scoped>
-  .wxc-index-list {
-    position: relative;
-  }
-
   .index-list {
     width: 750px;
     height: 1334px;
@@ -150,19 +200,20 @@
 
   .index-list-title {
     border-bottom-width: 1px;
-    border-color: rgba(32, 35, 37, 0.15);
+    border-bottom-color: rgba(32, 35, 37, 0.15);
     background-color: #FBFBFB;
     font-size: 24px;
     color: #666666;
-    padding-bottom: 14px;
-    padding-top: 14px;
-    padding-left: 23px;
+    height: 48px;
+    line-height: 48px;
+    padding-left: 24px;
     width: 750px;
   }
 
   .group-title {
     border-bottom-width: 0;
     padding-bottom: 0;
+    height: 60px;
     padding-top: 24px;
   }
 
@@ -180,7 +231,6 @@
 
   .iphone-x {
     height: 68px;
-    background-color: #ffffff;
   }
 
   .title {
@@ -248,7 +298,6 @@
     flex-direction: row;
     margin-left: 18px;
     margin-top: 18px;
-    background-color: #FBFBFB;
   }
 
   .group-item {
@@ -260,22 +309,18 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-color: #FFF;
-  }
-
-  .item-content {
-    flex-direction: column;
+    background-color: #ffffff;
   }
 
   .item-name {
     font-size: 24px;
     line-height: 26px;
-    color: #333;
+    color: #333333;
   }
 
   .item-desc {
     margin-top: 2px;
-    color: #999;
+    color: #999999;
     font-size: 20px;
     text-align: center;
   }

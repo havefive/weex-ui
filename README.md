@@ -81,7 +81,8 @@ npm i babel-plugin-component -D
       "component",
       {
         "libraryName": "weex-ui",
-        "libDir": "packages"
+        "libDir": "packages",
+        "style": false
       }
     ]
   ]
@@ -112,15 +113,18 @@ npm i babel-preset-stage-0 babel-plugin-component  -D
       "component",
       {
         "libraryName": "weex-ui",
-        "libDir": "packages"
+        "libDir": "packages",
+        "style": false
       }
     ]
   ]
 }
 ```
 
+More details can be found in [How to use with weex-toolkit](/docs/with-weex-toolkit.md) and [weex-ui-demo](https://github.com/tw93/weex-ui-demo).
+
 ### More
-- If `webpack.config.js`  babel-loader has a exclude for node_modules, Please turn on for week-ui `  exclude: /node_modules(?!\/.*(weex).*)/`.
+- If `webpack.config.js`  babel-loader has a exclude for node_modules, Please turn on for week-ui `exclude: /node_modules(?!(\/|\\).*(weex).*)/`.
 - You can find more examples [here](https://github.com/alibaba/weex-ui/tree/master/example). Write once and support iOS / Android / Html5 right now!
 
 ## Document
@@ -139,11 +143,13 @@ npm i babel-preset-stage-0 babel-plugin-component  -D
 |[wxc-tab-page](packages/wxc-tab-page/) * |Navigator|Single page Tab switching component|
 |[wxc-checkbox](packages/wxc-checkbox/)|Data Entry|Checkbox list|
 |[wxc-countdown](packages/wxc-countdown/)|Data Entry|Countdown component|
+|[wxc-grid-select](packages/wxc-grid-select/)|Data Entry|Grid selection component|
 |[wxc-radio](packages/wxc-radio/)|Data Entry|Radio list|
 |[wxc-slider-bar](packages/wxc-slider-bar/) * |Data Entry|Sliding select data|
 |[wxc-stepper](packages/wxc-stepper/)|Data Entry|Quantity changer|
 |[wxc-searchbar](packages/wxc-searchbar/)|Data Entry|Search bar component|
-|[wxc-grid-select](packages/wxc-grid-select/)|Data Display|Grid selection component|
+|[wxc-city](packages/wxc-city/)|Data Display|General city selection|
+|[wxc-icon](packages/wxc-icon/)|Data Display|Common iconFont summary |
 |[wxc-indexlist](packages/wxc-indexlist/)|Data Display|Index list component|
 |[wxc-page-calendar](packages/wxc-page-calendar/)|Data Display|Full page calendar|
 |[wxc-rich-text](packages/wxc-rich-text/)|Data Display|Dynamic template|

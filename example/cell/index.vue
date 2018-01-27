@@ -88,7 +88,7 @@
   }
 
   .default {
-    color: #000;
+    color: #000000;
   }
 
   .active {
@@ -107,7 +107,7 @@
 
   .demo-title {
     font-size: 30px;
-    color: #333;
+    color: #333333;
     margin-top: 30px;
     margin-left: 30px;
     margin-bottom: 16px;
@@ -124,7 +124,12 @@
   export default {
     components: { WxcCell, Title, Category },
     created () {
-      setTitle('Cell')
+      setTitle('Cell');
+      // 兼容weex playground的显示 正常业务不要用
+      const { appName } = weex.config.env;
+      if (/(WeexDemo)/i.test(appName)) {
+        this.link = 'https://h5.m.taobao.com/trip/weex-ui/demo/index.native-min.js';
+      }
     },
     data: () => ({
       color: '#000',

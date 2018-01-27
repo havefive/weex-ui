@@ -86,7 +86,7 @@
       // 选中状态背景色值
       checkedBackgroundColor: {
         type: String,
-        default: '#fff'
+        default: '#ffffff'
       },
       // 不可选状态背景色值
       disabledBackgroundColor: {
@@ -132,6 +132,7 @@
 
   .text-title {
     lines: 2;
+    overflow:hidden;
     line-height: 30px;
     text-overflow: ellipsis;
     text-align: center;

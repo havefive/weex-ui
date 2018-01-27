@@ -25,6 +25,18 @@ const Utils = {
   isEmptyObject (obj) {
     return Object.keys(obj).length === 0 && obj.constructor === Object;
   },
+  decodeIconFont (text) {
+    // 正则匹配 图标和文字混排 eg: 我去上学校&#xe600;,天天不&#xe600;迟到
+    const regExp = /&#x[a-z|0-9]{4,5};?/g;
+    if (regExp.test(text)) {
+      return text.replace(new RegExp(regExp, 'g'), function (iconText) {
+        const replace = iconText.replace(/&#x/, '0x').replace(/;$/, '');
+        return String.fromCharCode(replace);
+      });
+    } else {
+      return text;
+    }
+  },
   mergeDeep (target, ...sources) {
     if (!sources.length) return target;
     const source = sources.shift();
@@ -58,12 +70,12 @@ const Utils = {
     return parsedUrl.toString();
   },
   goToH5Page (jumpUrl, animated = false, callback = null) {
-    const Navigator = weex.requireModule('navigator')
+    const Navigator = weex.requireModule('navigator');
     const jumpUrlObj = new Utils.UrlParser(jumpUrl, true);
     const url = Utils.appendProtocol(jumpUrlObj.toString());
     Navigator.push({
       url: Utils.encodeURLParams(url),
-      animated: animated
+      animated: animated.toString()
     }, callback);
   },
   env: {
@@ -74,6 +86,10 @@ const Utils = {
     isTrip () {
       const { appName } = weex.config.env;
       return appName === 'LX';
+    },
+    isBoat () {
+      const { appName } = weex.config.env;
+      return appName === 'Boat' || appName === 'BoatPlayground';
     },
     isWeb () {
       const { platform } = weex.config.env;
@@ -102,8 +118,12 @@ const Utils = {
       const { appName } = weex.config.env;
       return appName === 'AP';
     },
-    isAlipayWeb () {
-      return Utils.env.isAlipay() && Utils.env.isWeb();
+    isTmall () {
+      const { appName } = weex.config.env;
+      return /(tm|tmall|天猫)/i.test(appName);
+    },
+    isAliWeex () {
+      return Utils.env.isTmall() || Utils.env.isTrip() || Utils.env.isTaobao();
     },
     supportsEB () {
       const weexVersion = weex.config.env.weexVersion || '0';

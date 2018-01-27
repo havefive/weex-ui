@@ -1,5 +1,6 @@
 <!-- CopyRight (C) 2017-2022 Alibaba Group Holding Limited. -->
 <!-- Created by Tw93 on 16/10/25. -->
+<!-- Updated by Tw93 on 17/01/06. -->
 <!--A Mask.-->
 
 <template>
@@ -124,7 +125,7 @@
     data: () => ({
       closeIcon: 'https://gw.alicdn.com/tfs/TB1qDJUpwMPMeJjy1XdXXasrXXa-64-64.png',
       maskTop: 264,
-      opacity: 0
+      opened: false
     }),
     computed: {
       mergeOverlayCfg () {
@@ -134,7 +135,7 @@
         }
       },
       maskStyle () {
-        const { width, height, showClose, hasAnimation, opacity } = this;
+        const { width, height, showClose, hasAnimation, opened } = this;
         const newHeight = showClose ? height - 0 + 100 : height;
         const { deviceHeight, deviceWidth, platform } = weex.config.env;
         const _deviceHeight = deviceHeight || 1334;
@@ -146,7 +147,7 @@
           height: newHeight + 'px',
           left: (750 - width) / 2 + 'px',
           top: (pageHeight - height) / 2 + 'px',
-          opacity: hasAnimation ? opacity : 1
+          opacity: hasAnimation && !opened ? 0 : 1
         }
       },
       contentStyle () {
@@ -182,7 +183,8 @@
         }
       },
       needEmit (bool = false) {
-        !bool && (this.$emit('wxcMaskSetHidden', {}));
+        this.opened = bool;
+        !bool && this.$emit('wxcMaskSetHidden', {});
       },
       appearMask (bool, duration = this.duration) {
         const { hasAnimation, timingFunction } = this;

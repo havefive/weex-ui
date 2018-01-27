@@ -6,6 +6,7 @@
 import Utils from './packages/utils';
 import WxcButton from './packages/wxc-button';
 import WxcCell from './packages/wxc-cell';
+import WxcCity from './packages/wxc-city';
 import WxcCheckbox from './packages/wxc-checkbox';
 import WxcCheckboxList from './packages/wxc-checkbox-list';
 import WxcCountdown from './packages/wxc-countdown';
@@ -13,6 +14,7 @@ import WxcDialog from './packages/wxc-dialog';
 import WxcEpSlider from './packages/wxc-ep-slider';
 import WxcPanItem from './packages/wxc-pan-item';
 import WxcGridSelect from './packages/wxc-grid-select';
+import WxcIcon from './packages/wxc-icon';
 import WxcIndexlist from './packages/wxc-indexlist';
 import WxcLightbox from './packages/wxc-lightbox';
 import WxcLoading from './packages/wxc-loading';
@@ -42,6 +44,7 @@ export {
   Utils,
   WxcButton,
   WxcCell,
+  WxcCity,
   WxcCheckbox,
   WxcCheckboxList,
   WxcCountdown,
@@ -49,6 +52,7 @@ export {
   WxcEpSlider,
   WxcPanItem,
   WxcGridSelect,
+  WxcIcon,
   WxcIndexlist,
   WxcLightbox,
   WxcLoading,

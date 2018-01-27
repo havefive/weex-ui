@@ -3,8 +3,7 @@
 <!-- Updated by Tw93 on 17/11/22. -->
 
 <template>
-  <div class="wxc-page-calendar"
-       ref="pageCalendar">
+  <div class="wxc-page-calendar" ref="pageCalendar">
     <wxc-minibar :show="showTitle"
                  v-bind="minibarCfg"
                  :use-default-return="false"
@@ -228,7 +227,7 @@
     right: -750px;
     width: 750px;
     color: #333333;
-    background-color: #fff;
+    background-color: #ffffff;
   }
 
   .flex-item {
@@ -256,7 +255,6 @@
 
   .calendar-list {
     flex: 1;
-    flex-direction: column;
   }
 
   .month-text {
@@ -277,7 +275,6 @@
     border-color: #f2f3f4;
     align-items: center;
     justify-content: space-between;
-    position: relative;
   }
 
   .row-item {
@@ -315,7 +312,6 @@
     color: #999999;
     text-align: center;
     font-size: 24px;
-    overflow: hidden;
     text-overflow: ellipsis;
   }
 
@@ -328,7 +324,7 @@
   }
 
   .item-row-selected {
-    color: #fff;
+    color: #ffffff;
     background-color: #FFC900;
     text-align: center;
   }
